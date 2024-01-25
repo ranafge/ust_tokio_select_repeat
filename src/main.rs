@@ -1,4 +1,3 @@
-use alloc::task;
 use tokio::sync::oneshot;
 
 // #[tokio::main]
@@ -15,8 +14,8 @@ use tokio::sync::oneshot;
 //     });
 //     // there are two channel to send message first one is send `one` and second channel send  'two'
 
-//     // in tokio::select wait for a message to complete one . there are two branch of val 
-//     // if rx1 or rx2 is complete message will print for that complete first. other one will be drop 
+//     // in tokio::select wait for a message to complete one . there are two branch of val
+//     // if rx1 or rx2 is complete message will print for that complete first. other one will be drop
 //     // drop or cancellatin occure by dropin future
 //     tokio::select! {
 //         // val is a pttern = rx1 is async operion `{}` block is handler
@@ -29,13 +28,10 @@ use tokio::sync::oneshot;
 //     }
 // }
 
-// if <pattern> = <async operation>  
+// if <pattern> = <async operation>
 //when async operation result match with pattern then cancell other branches and execute handler=> <handler>
 
 // select takes async operation
-
-
-
 
 // Select takes async operation
 
@@ -46,10 +42,7 @@ use tokio::net::TcpStream;
 async fn main() {
     let (tx, rx) = oneshot::channel();
 
-
-    tokio::spawn(async move {
-        tx.send("done").unwrap()
-    });
+    tokio::spawn(async move { tx.send("done").unwrap() });
 
     tokio::select! {
         socket  = TcpStream::connect("localhost::3465") => {
